@@ -37,8 +37,7 @@
     <div id="main-menu" class="hidden-section">
         <!-- Sección de Reportes -->
         <div id="report-section" class="hidden-section main-container">
-            <h4>Descarga de Reportes</h4>
-
+            <h4>Consulta de Reportes</h4>
             <div class="mb-3">
                 <label class="form-label">Seleccione cuenta:</label>
                 <div class="form-check">
@@ -77,6 +76,7 @@
             if(username && password) {
                 document.getElementById('login-section').classList.add('hidden-section');
                 document.getElementById('main-menu').classList.remove('hidden-section');
+                document.getElementById('report-section').classList.remove('hidden-section');
             }
         }
 
@@ -87,10 +87,12 @@
 
         // Generar reporte
         function generateReport() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
             const account = document.querySelector('input[name="account"]:checked');
 
-            if(!account) {
-                alert('Por favor selecciona una cuenta');
+            if(!startDate || !endDate || !account) {
+                alert('Por favor complete todos los campos');
                 return;
             }
 
@@ -100,14 +102,14 @@
         // Descargar archivo TXT
         function downloadTxt() {
             const content = `Reporte generado
-            Fecha Inicio: ${document.getElementById('startDate').value}
-            Fecha Fin: ${document.getElementById('endDate').value}
-            Cuenta seleccionada: ${document.querySelector('input[name="account"]:checked').value}
+Fecha Inicio: ${document.getElementById('startDate').value}
+Fecha Fin: ${document.getElementById('endDate').value}
+Cuenta seleccionada: ${document.querySelector('input[name="account"]:checked').value}
 
-            Datos de ejemplo:
-            1,2023-01-01,Transacción A,100.00
-            2,2023-01-02,Transacción B,200.00
-            3,2023-01-03,Transacción C,300.00`;
+Datos de ejemplo:
+1,2023-01-01,Transacción A,100.00
+2,2023-01-02,Transacción B,200.00
+3,2023-01-03,Transacción C,300.00`;
 
             const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
