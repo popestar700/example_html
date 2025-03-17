@@ -101,14 +101,12 @@
         // Descargar archivo TXT
         function downloadTxt() {
             const content = `Reporte generado
-Fecha Inicio: ${document.getElementById('startDate').value}
-Fecha Fin: ${document.getElementById('endDate').value}
-Cuenta seleccionada: ${document.querySelector('input[name="account"]:checked').value}
+            Cuenta seleccionada: ${document.querySelector('input[name="account"]:checked').value}
 
-Datos de ejemplo:
-1,2023-01-01,Transacción A,100.00
-2,2023-01-02,Transacción B,200.00
-3,2023-01-03,Transacción C,300.00`;
+            Datos de ejemplo:
+            1,2023-01-01,Transacción A,100.00
+            2,2023-01-02,Transacción B,200.00
+            3,2023-01-03,Transacción C,300.00`;
 
             const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
