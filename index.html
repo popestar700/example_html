@@ -35,38 +35,9 @@
 
     <!-- Menú Principal -->
     <div id="main-menu" class="hidden-section">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Sistema</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="reportMenu" role="button" data-bs-toggle="dropdown">
-                                Reportes
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" onclick="showReportSection()">Generar Reporte</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
         <!-- Sección de Reportes -->
         <div id="report-section" class="hidden-section main-container">
-            <h4>Consulta de Reportes</h4>
-            
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Fecha Inicio:</label>
-                    <input type="date" class="form-control" id="startDate">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Fecha Fin:</label>
-                    <input type="date" class="form-control" id="endDate">
-                </div>
-            </div>
+            <h4>Descarga de Reportes</h4>
 
             <div class="mb-3">
                 <label class="form-label">Seleccione cuenta:</label>
@@ -102,7 +73,7 @@
         function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            
+
             if(username && password) {
                 document.getElementById('login-section').classList.add('hidden-section');
                 document.getElementById('main-menu').classList.remove('hidden-section');
@@ -116,30 +87,28 @@
 
         // Generar reporte
         function generateReport() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
             const account = document.querySelector('input[name="account"]:checked');
-            
-            if(!startDate || !endDate || !account) {
-                alert('Por favor complete todos los campos');
+
+            if(!account) {
+                alert('Por favor selecciona una cuenta');
                 return;
             }
-            
+
             document.getElementById('download-section').classList.remove('hidden-section');
         }
 
         // Descargar archivo TXT
         function downloadTxt() {
             const content = `Reporte generado
-Fecha Inicio: ${document.getElementById('startDate').value}
-Fecha Fin: ${document.getElementById('endDate').value}
-Cuenta seleccionada: ${document.querySelector('input[name="account"]:checked').value}
+            Fecha Inicio: ${document.getElementById('startDate').value}
+            Fecha Fin: ${document.getElementById('endDate').value}
+            Cuenta seleccionada: ${document.querySelector('input[name="account"]:checked').value}
 
-Datos de ejemplo:
-1,2023-01-01,Transacción A,100.00
-2,2023-01-02,Transacción B,200.00
-3,2023-01-03,Transacción C,300.00`;
-            
+            Datos de ejemplo:
+            1,2023-01-01,Transacción A,100.00
+            2,2023-01-02,Transacción B,200.00
+            3,2023-01-03,Transacción C,300.00`;
+
             const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
