@@ -87,11 +87,10 @@
 
         // Generar reporte
         function generateReport() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
+
             const account = document.querySelector('input[name="account"]:checked');
 
-            if(!startDate || !endDate || !account) {
+            if(!account) {
                 alert('Por favor complete todos los campos');
                 return;
             }
